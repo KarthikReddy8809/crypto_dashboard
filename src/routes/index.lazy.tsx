@@ -1,4 +1,5 @@
 import { SearchBar } from '@/Components/SearchBar'
+import { TableComp } from '@/Components/TableComp'
 import { createLazyFileRoute } from '@tanstack/react-router'
 
 
@@ -18,6 +19,7 @@ function RouteComponent() {
       <h5>Signup to explore more about cryptos.</h5>
       </div>
       <SearchBar/>
+      <TableComp/>
     </div>
   )
 }
