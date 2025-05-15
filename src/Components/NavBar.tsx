@@ -10,6 +10,7 @@ import {
     CommandItem,
     CommandList,
   } from "@/components/ui/command"
+  import {useRouter} from '@tanstack/react-router'
   import {
     Popover,
     PopoverContent,
@@ -27,11 +28,12 @@ export const NavBar = () => {
         { label: "GBP", value: "GBP" },
        
       ]
+      const router=useRouter();
     return (
-        <div className='sticky top-0 z-50 flex flex-row w-full items-center h-16 border-b-2 border-b-muted-foreground justify-evenly'>
-        <img src={logo} alt="logo" className='h-5 md:h-10  cursor-pointer' />
-        <div className='flex flex-row cursor-pointer hidden sm:flex items-center text-white min-w-lg  justify-evenly'>
-        <h3>Home</h3>
+        <div className='sticky top-0 z-50 flex flex-row w-full backdrop-blur items-center h-16 border-b-2 border-b-muted-foreground justify-evenly'>
+        <img src={logo} alt="logo" className='h-5 md:h-10  cursor-pointer' onClick={()=>router.navigate({to:"/"})} />
+        <div className=' flex-row cursor-pointer hidden md:flex items-center text-white min-w-lg  justify-evenly'>
+        <h3 onClick={()=>router.navigate({to:"/"})}>Home</h3>
         <h3>Features</h3>
         <h3>Pricing</h3>
         <h3>Support</h3>
