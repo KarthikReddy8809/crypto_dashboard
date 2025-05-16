@@ -12,7 +12,7 @@ export async function getTopCoins() {
       return data;
     } catch (error) {
       console.error('Error fetching top coins:', error);
-      return error;
+      return [];
     }
   }
   

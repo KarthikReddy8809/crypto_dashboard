@@ -8,6 +8,7 @@ import {
     TableRow,
   } from "@/components/ui/table";
   import {useRouter} from '@tanstack/react-router'
+  import { Loader2 } from 'lucide-react';
   import { useEffect,useState } from "react";
   import {getTopCoins} from '../api/HomePageApi'
 
@@ -19,21 +20,32 @@ import {
     market_cap: number;
     image:string; // If you meant to use price_change or similar, update accordingly
   };
-  
 
 export const TableComp = () => {
   const [data,setData]=useState<coin[]>([]);
+  const [loading,setLoading]=useState<boolean>(false);
   const router=useRouter();
   useEffect(()=>{
+    setLoading(true);
     async function getData(){
-      const topCoins = await getTopCoins()
+      const topCoins :coin[] = await getTopCoins()
       setData(topCoins);
+      setLoading(false);
     }
     getData()
   },[])
   
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-64 text-white">
+        <Loader2 className="h-8 w-8 animate-spin mr-2" />
+        Loading...
+      </div>
+    );
+  }
+  else{
     return(
-      <div className='flex flex-col items-center w-[300px] md:w-[600px] text-white bg-violet-950 border border-white rounded-md'>
+      <div className='flex flex-col items-center w-[400px] md:w-[700px] text-white bg-violet-950 border border-black shadow-lg rounded-md'>
         <Table>
   <TableHeader>
     <TableRow>
@@ -46,9 +58,9 @@ export const TableComp = () => {
   
     </TableRow>
   </TableHeader>
-  <TableBody>
+  <TableBody className="items-center">
   {data.map((coin, index) => (
-    <TableRow key={coin.id} className="cursor-pointer" onClick={()=>router.navigate({to:`/coin/${coin.name}`})}>
+    <TableRow key={coin.id} className="cursor-pointer" onClick={()=>router.navigate({to:`/coin/${coin.id}`})}>
       <TableHead className="text-white">{index + 1}</TableHead>
       <TableHead className="text-white flex items-center gap-2"><span><img src={coin.image} alt="" className="w-10 h-10" /></span>{coin.name}</TableHead>
       <TableHead className="text-white">{coin.current_price}</TableHead>
@@ -60,4 +72,5 @@ export const TableComp = () => {
 </Table>
 </div>
     )
+}
 }

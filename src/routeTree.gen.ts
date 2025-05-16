@@ -14,7 +14,7 @@ import { createFileRoute } from '@tanstack/react-router'
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as AboutImport } from './routes/about'
-import { Route as CoinCoinNameImport } from './routes/coin/$coinName'
+import { Route as CoinCoinIdImport } from './routes/coin/$coinId'
 
 // Create Virtual Routes
 
@@ -34,9 +34,9 @@ const IndexLazyRoute = IndexLazyImport.update({
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route))
 
-const CoinCoinNameRoute = CoinCoinNameImport.update({
-  id: '/coin/$coinName',
-  path: '/coin/$coinName',
+const CoinCoinIdRoute = CoinCoinIdImport.update({
+  id: '/coin/$coinId',
+  path: '/coin/$coinId',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -58,11 +58,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutImport
       parentRoute: typeof rootRoute
     }
-    '/coin/$coinName': {
-      id: '/coin/$coinName'
-      path: '/coin/$coinName'
-      fullPath: '/coin/$coinName'
-      preLoaderRoute: typeof CoinCoinNameImport
+    '/coin/$coinId': {
+      id: '/coin/$coinId'
+      path: '/coin/$coinId'
+      fullPath: '/coin/$coinId'
+      preLoaderRoute: typeof CoinCoinIdImport
       parentRoute: typeof rootRoute
     }
   }
@@ -73,41 +73,41 @@ declare module '@tanstack/react-router' {
 export interface FileRoutesByFullPath {
   '/': typeof IndexLazyRoute
   '/about': typeof AboutRoute
-  '/coin/$coinName': typeof CoinCoinNameRoute
+  '/coin/$coinId': typeof CoinCoinIdRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexLazyRoute
   '/about': typeof AboutRoute
-  '/coin/$coinName': typeof CoinCoinNameRoute
+  '/coin/$coinId': typeof CoinCoinIdRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexLazyRoute
   '/about': typeof AboutRoute
-  '/coin/$coinName': typeof CoinCoinNameRoute
+  '/coin/$coinId': typeof CoinCoinIdRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/coin/$coinName'
+  fullPaths: '/' | '/about' | '/coin/$coinId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/coin/$coinName'
-  id: '__root__' | '/' | '/about' | '/coin/$coinName'
+  to: '/' | '/about' | '/coin/$coinId'
+  id: '__root__' | '/' | '/about' | '/coin/$coinId'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexLazyRoute: typeof IndexLazyRoute
   AboutRoute: typeof AboutRoute
-  CoinCoinNameRoute: typeof CoinCoinNameRoute
+  CoinCoinIdRoute: typeof CoinCoinIdRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexLazyRoute: IndexLazyRoute,
   AboutRoute: AboutRoute,
-  CoinCoinNameRoute: CoinCoinNameRoute,
+  CoinCoinIdRoute: CoinCoinIdRoute,
 }
 
 export const routeTree = rootRoute
@@ -122,7 +122,7 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/about",
-        "/coin/$coinName"
+        "/coin/$coinId"
       ]
     },
     "/": {
@@ -131,8 +131,8 @@ export const routeTree = rootRoute
     "/about": {
       "filePath": "about.tsx"
     },
-    "/coin/$coinName": {
-      "filePath": "coin/$coinName.tsx"
+    "/coin/$coinId": {
+      "filePath": "coin/$coinId.tsx"
     }
   }
 }
