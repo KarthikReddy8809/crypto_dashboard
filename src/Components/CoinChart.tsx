@@ -1,4 +1,4 @@
-import { useState ,useEffect} from "react";
+{/*import { useState ,useEffect} from "react";
 interface CoinChartProps {
   coinId:string;
 }
@@ -28,4 +28,4 @@ export const CoinChart = ({coinId}:CoinChartProps) => {
             <h1>Chart</h1>
         </div>
     )
-}
+}*/}
