@@ -2,7 +2,7 @@ import { createFileRoute } from '@tanstack/react-router'
 import {useParams} from '@tanstack/react-router'
 import {useEffect,useState} from 'react'
 import { Loader2 } from 'lucide-react'
-//import { CoinChart } from '@/Components/CoinChart'
+import CoinChart from '@/Components/CoinChart'
 export const Route = createFileRoute('/coin/$coinId')({
   component: RouteComponent,
 })
@@ -47,7 +47,7 @@ function RouteComponent() {
       <div className='flex flex-col items-center mt-[100px] gap-8'>
         <img src={temp?.image?.large} alt="" className='w-50 h-50' />
         <h1 className='text-white text-4xl font-bold'>{temp.name}</h1>
-        {/*<CoinChart coinId={coinId}/>*/}
+        <CoinChart coinId={coinId}/>
       </div>
     </div>
   )
