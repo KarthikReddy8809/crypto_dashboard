@@ -7,6 +7,7 @@ import {
     TableRow,
   } from "@/components/ui/table";
   import {useRouter} from '@tanstack/react-router'
+  import useCurrencyStore from '../stores/useCurrencyStore'
   import { Loader2 } from 'lucide-react';
   import { useEffect,useState } from "react";
   import {getTopCoins} from '../api/HomePageApi'
@@ -23,16 +24,17 @@ import {
 export const TableComp = () => {
   const [data,setData]=useState<coin[]>([]);
   const [loading,setLoading]=useState<boolean>(false);
+  const {currency}=useCurrencyStore()
   const router=useRouter();
   useEffect(()=>{
     setLoading(true);
     async function getData(){
-      const topCoins :coin[] = await getTopCoins()
+      const topCoins :coin[] = await getTopCoins(currency)
       setData(topCoins);
       setLoading(false);
     }
     getData()
-  },[])
+  },[currency])
   
   if (loading) {
     return (

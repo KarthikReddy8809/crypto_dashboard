@@ -1,5 +1,6 @@
 import  { useEffect, useState } from "react";
 import { Chart } from "react-google-charts";
+import useCurrencyStore from '../stores/useCurrencyStore'
 
 interface CoinChartProps {
   coinId: string;
@@ -11,12 +12,12 @@ const PriceChart = ({coinId}:CoinChartProps) => {
   ]);
   const [loading, setLoading] = useState(true);
   const [coinData,setCoinData]=useState<any>([]);
-
+  const {currency}=useCurrencyStore()
   useEffect(() => {
     const fetchChartData = async () => {
       try {
         const res = await fetch(
-          `https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=usd&days=30&interval=daily`
+          `https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=${currency}&days=30&interval=daily`
         );
         const data = await res.json();
 
@@ -48,7 +49,7 @@ const PriceChart = ({coinId}:CoinChartProps) => {
     }
     fetchChartData();
     fetchCoinById();
-  }, []);
+  }, [currency]);
 
   return (
     <div className="w-full max-w-xs sm:max-w-sm md:max-w-lg">

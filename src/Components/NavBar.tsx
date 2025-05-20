@@ -2,6 +2,8 @@ import React from 'react'
 import logo from '../assets/logo.png'
 import { Button } from '@/components/ui/button'
 import { ArrowUpRight } from 'lucide-react';
+import useCurrencyStore from '../stores/useCurrencyStore'
+import { useEffect } from 'react';
 import {
     Command,
     CommandEmpty,
@@ -18,9 +20,13 @@ import {
 import { cn } from '@/lib/utils'
 import { Check, ChevronsUpDown } from 'lucide-react'
 
+
 export const NavBar = () => {
     const [open, setOpen] = React.useState(false)
+    const {setCurrency}=useCurrencyStore()
+    const {currency}=useCurrencyStore()
     const [value, setValue] = React.useState("")
+    console.log("currency is",currency);
     const frameworks = [
         { label: "USD", value: "USD" },
         { label: "EUR", value: "EUR" },
@@ -28,6 +34,9 @@ export const NavBar = () => {
        
       ]
       const router=useRouter();
+      useEffect(()=>{
+        setCurrency(value)
+      },[value])
     return (
         <div className='sticky top-0 z-50 flex flex-row w-full backdrop-blur items-center h-16 border-b-2 border-b-muted-foreground justify-evenly'>
         <img src={logo} alt="logo" className='h-5 md:h-10  cursor-pointer' onClick={()=>router.navigate({to:"/"})} />
@@ -54,6 +63,7 @@ export const NavBar = () => {
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-[100px] p-0">
+
         <Command>
          
           <CommandList>
