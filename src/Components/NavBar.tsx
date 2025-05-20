@@ -23,20 +23,23 @@ import { Check, ChevronsUpDown } from 'lucide-react'
 
 export const NavBar = () => {
     const [open, setOpen] = React.useState(false)
-    const {setCurrency}=useCurrencyStore()
-    const {currency}=useCurrencyStore()
+    const {currency,symbol,setCurrency,setSymbol}=useCurrencyStore()
     const [value, setValue] = React.useState("")
-    console.log("currency is",currency);
+    const [symbols,setSymbols]=React.useState("")
+    console.log("symbols",symbols)
     const frameworks = [
-        { label: "USD", value: "USD" },
-        { label: "EUR", value: "EUR" },
-        { label: "GBP", value: "GBP" },
+        { label: "USD", value: "USD",symbol:"$" },
+        { label: "EUR", value: "EUR",symbol:"€" },
+        { label: "GBP", value: "GBP",symbol:"£" },
+        { label: "INR", value: "INR",symbol:"₹" },
        
       ]
       const router=useRouter();
       useEffect(()=>{
         setCurrency(value)
-      },[value])
+        setSymbol(symbols)
+        console.log(symbols)
+      },[value,symbols])
     return (
         <div className='sticky top-0 z-50 flex flex-row w-full backdrop-blur items-center h-16 border-b-2 border-b-muted-foreground justify-evenly'>
         <img src={logo} alt="logo" className='h-5 md:h-10  cursor-pointer' onClick={()=>router.navigate({to:"/"})} />
@@ -75,6 +78,7 @@ export const NavBar = () => {
                   value={framework.value}
                   onSelect={(currentValue) => {
                     setValue(currentValue === value ? "" : currentValue)
+                    setSymbols(framework.symbol)
                     setOpen(false)
                   }}
                 >

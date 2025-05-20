@@ -24,7 +24,8 @@ import {
 export const TableComp = () => {
   const [data,setData]=useState<coin[]>([]);
   const [loading,setLoading]=useState<boolean>(false);
-  const {currency}=useCurrencyStore()
+  const {currency,symbol}=useCurrencyStore()
+ 
   const router=useRouter();
   useEffect(()=>{
     setLoading(true);
@@ -64,7 +65,7 @@ export const TableComp = () => {
     <TableRow key={coin.id} className="cursor-pointer" onClick={()=>router.navigate({to:`/coin/${coin.id}`})}>
       <TableHead className="text-white">{index + 1}</TableHead>
       <TableHead className="text-white flex items-center gap-2"><span><img src={coin.image} alt="" className="w-10 h-10" /></span>{coin.name}</TableHead>
-      <TableHead className="text-white">{coin.current_price}</TableHead>
+      <TableHead className="text-white">{symbol}{coin.current_price}</TableHead>
       <TableHead className=" text-white">{coin.price_change_24h}</TableHead>
       <TableHead className=" text-white">{coin.market_cap}</TableHead>
     </TableRow>
