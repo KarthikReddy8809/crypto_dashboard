@@ -23,7 +23,7 @@ import { Check, ChevronsUpDown } from 'lucide-react'
 
 export const NavBar = () => {
     const [open, setOpen] = React.useState(false)
-    const {currency,symbol,setCurrency,setSymbol}=useCurrencyStore()
+    const {setCurrency,setSymbol}=useCurrencyStore()
     const [value, setValue] = React.useState("")
     const [symbols,setSymbols]=React.useState("")
     console.log("symbols",symbols)
