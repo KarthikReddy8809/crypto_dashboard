@@ -51,26 +51,26 @@ export const NavBar = () => {
       },[value,symbols])
     return (
         <div className='sticky top-0 z-50 flex flex-row w-full backdrop-blur items-center h-16 border-b-2 border-b-muted-foreground justify-evenly'>
-        <div className='md:hidden'>
+        <div className='md:hidden mt-2'>
         <Sheet>
-  <SheetTrigger><AlignJustify size={16} className='text-white'/></SheetTrigger>
+  <SheetTrigger><AlignJustify size={15} className='text-white'/></SheetTrigger>
   <SheetContent side="left" className='bg-blue-950'>
-    <SheetHeader className='flex flex-col gap-2 '>
+    <SheetHeader className='flex flex-col gap-5 mt-5'>
       <SheetClose>
       <SheetTitle><h3 className='text-white' onClick={()=>router.navigate({to:"/"})}>Home</h3></SheetTitle>
-      <SheetTitle><h3 className='text-white' onClick={()=>router.navigate({to:"/"})}>Features</h3></SheetTitle>
-      <SheetTitle><h3 className='text-white' onClick={()=>router.navigate({to:"/"})}>Pricing</h3></SheetTitle>
+      <SheetTitle><h3 className='text-white' onClick={()=>router.navigate({to:"/features"})}>Features</h3></SheetTitle>
+      <SheetTitle><h3 className='text-white' onClick={()=>router.navigate({to:"/pricing"})}>Pricing</h3></SheetTitle>
       <SheetTitle><h3 className='text-white' onClick={()=>router.navigate({to:"/support"})}>Support</h3></SheetTitle>
       </SheetClose>
     </SheetHeader>
   </SheetContent>
 </Sheet>
         </div>
-        <img src={logo} alt="logo" className='h-5 md:h-10  cursor-pointer' onClick={()=>router.navigate({to:"/"})} />
+        <img src={logo} alt="logo" className='h-6 md:h-10  cursor-pointer' onClick={()=>router.navigate({to:"/"})} />
         <div className=' flex-row cursor-pointer hidden md:flex items-center text-white min-w-lg  justify-evenly'>
         <h3 onClick={()=>router.navigate({to:"/"})}>Home</h3>
-        <h3>Features</h3>
-        <h3>Pricing</h3>
+        <h3 onClick={()=>router.navigate({to:"/features"})}>Features</h3>
+        <h3 onClick={()=>router.navigate({to:"/pricing"})}>Pricing</h3>
         <h3 onClick={()=>router.navigate({to:"/support"})}>Support</h3>
         </div>
         
@@ -121,7 +121,7 @@ export const NavBar = () => {
         </Command>
       </PopoverContent>
     </Popover>
-    <Button  className='bg-white text-black rounded-full hover:bg-white/80'>Sign Up <ArrowUpRight size={16}/></Button>
+    <Button  className='bg-white text-black rounded-full hover:bg-white/80' onClick={()=>router.navigate({to:"/signup"})}>Sign Up <ArrowUpRight size={16}/></Button>
     </div>
         </div>
     )

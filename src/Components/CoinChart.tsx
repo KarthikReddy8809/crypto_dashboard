@@ -74,7 +74,7 @@ const PriceChart = ({coinId}:CoinChartProps) => {
       <div className="flex flex-col md:text-lg text-sm mt-10  gap-2"> 
       <div className="flex flex-row justify-between">
       <h3 className="text-white space-x-2">Crypto Market Rank</h3>
-         <p className="text-white ">{coinData?.market_cap_rank?.usd}</p>
+         <p className="text-white ">{coinData?.market_cap_rank}</p>
       </div>
       <hr className="w-full border-muted-foreground "/>
       <div className="flex flex-row justify-between">

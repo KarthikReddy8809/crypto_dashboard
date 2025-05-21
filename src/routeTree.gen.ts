@@ -14,6 +14,9 @@ import { createFileRoute } from '@tanstack/react-router'
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as SupportImport } from './routes/support'
+import { Route as SignupImport } from './routes/signup'
+import { Route as PricingImport } from './routes/pricing'
+import { Route as FeaturesImport } from './routes/features'
 import { Route as AboutImport } from './routes/about'
 import { Route as CoinCoinIdImport } from './routes/coin/$coinId'
 
@@ -26,6 +29,24 @@ const IndexLazyImport = createFileRoute('/')()
 const SupportRoute = SupportImport.update({
   id: '/support',
   path: '/support',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const SignupRoute = SignupImport.update({
+  id: '/signup',
+  path: '/signup',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const PricingRoute = PricingImport.update({
+  id: '/pricing',
+  path: '/pricing',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const FeaturesRoute = FeaturesImport.update({
+  id: '/features',
+  path: '/features',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -65,6 +86,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutImport
       parentRoute: typeof rootRoute
     }
+    '/features': {
+      id: '/features'
+      path: '/features'
+      fullPath: '/features'
+      preLoaderRoute: typeof FeaturesImport
+      parentRoute: typeof rootRoute
+    }
+    '/pricing': {
+      id: '/pricing'
+      path: '/pricing'
+      fullPath: '/pricing'
+      preLoaderRoute: typeof PricingImport
+      parentRoute: typeof rootRoute
+    }
+    '/signup': {
+      id: '/signup'
+      path: '/signup'
+      fullPath: '/signup'
+      preLoaderRoute: typeof SignupImport
+      parentRoute: typeof rootRoute
+    }
     '/support': {
       id: '/support'
       path: '/support'
@@ -87,6 +129,9 @@ declare module '@tanstack/react-router' {
 export interface FileRoutesByFullPath {
   '/': typeof IndexLazyRoute
   '/about': typeof AboutRoute
+  '/features': typeof FeaturesRoute
+  '/pricing': typeof PricingRoute
+  '/signup': typeof SignupRoute
   '/support': typeof SupportRoute
   '/coin/$coinId': typeof CoinCoinIdRoute
 }
@@ -94,6 +139,9 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexLazyRoute
   '/about': typeof AboutRoute
+  '/features': typeof FeaturesRoute
+  '/pricing': typeof PricingRoute
+  '/signup': typeof SignupRoute
   '/support': typeof SupportRoute
   '/coin/$coinId': typeof CoinCoinIdRoute
 }
@@ -102,22 +150,50 @@ export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexLazyRoute
   '/about': typeof AboutRoute
+  '/features': typeof FeaturesRoute
+  '/pricing': typeof PricingRoute
+  '/signup': typeof SignupRoute
   '/support': typeof SupportRoute
   '/coin/$coinId': typeof CoinCoinIdRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/support' | '/coin/$coinId'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/features'
+    | '/pricing'
+    | '/signup'
+    | '/support'
+    | '/coin/$coinId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/support' | '/coin/$coinId'
-  id: '__root__' | '/' | '/about' | '/support' | '/coin/$coinId'
+  to:
+    | '/'
+    | '/about'
+    | '/features'
+    | '/pricing'
+    | '/signup'
+    | '/support'
+    | '/coin/$coinId'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/features'
+    | '/pricing'
+    | '/signup'
+    | '/support'
+    | '/coin/$coinId'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexLazyRoute: typeof IndexLazyRoute
   AboutRoute: typeof AboutRoute
+  FeaturesRoute: typeof FeaturesRoute
+  PricingRoute: typeof PricingRoute
+  SignupRoute: typeof SignupRoute
   SupportRoute: typeof SupportRoute
   CoinCoinIdRoute: typeof CoinCoinIdRoute
 }
@@ -125,6 +201,9 @@ export interface RootRouteChildren {
 const rootRouteChildren: RootRouteChildren = {
   IndexLazyRoute: IndexLazyRoute,
   AboutRoute: AboutRoute,
+  FeaturesRoute: FeaturesRoute,
+  PricingRoute: PricingRoute,
+  SignupRoute: SignupRoute,
   SupportRoute: SupportRoute,
   CoinCoinIdRoute: CoinCoinIdRoute,
 }
@@ -141,6 +220,9 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/about",
+        "/features",
+        "/pricing",
+        "/signup",
         "/support",
         "/coin/$coinId"
       ]
@@ -150,6 +232,15 @@ export const routeTree = rootRoute
     },
     "/about": {
       "filePath": "about.tsx"
+    },
+    "/features": {
+      "filePath": "features.tsx"
+    },
+    "/pricing": {
+      "filePath": "pricing.tsx"
+    },
+    "/signup": {
+      "filePath": "signup.tsx"
     },
     "/support": {
       "filePath": "support.tsx"
