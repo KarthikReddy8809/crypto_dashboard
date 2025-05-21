@@ -4,8 +4,7 @@ import { Input } from '../components/ui/input';
 import { Card } from '../components/ui/card';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '../components/ui/button';
-import emailjs from '@emailjs/browser';
-import { Toaster, toast } from 'sonner';
+import { Toaster } from 'sonner';
 const UserSchema = z.object({
   firstname: z.string().min(3,"Name must be at least 3 characters long"),
   lastname: z.string().min(3,"Name must be at least 3 characters long"),
@@ -17,15 +16,13 @@ function App() {
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm<z.infer<typeof UserSchema>>({
     resolver: zodResolver(UserSchema),
   });
 
   const onSubmit=(data:z.infer<typeof UserSchema>) => {
-    
-   
+    console.log(data)
   }  
   return (
     <div className='flex justify-center items-center h-screen'>
