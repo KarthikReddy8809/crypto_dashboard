@@ -47,7 +47,7 @@ export const NavBar = () => {
         <h3 onClick={()=>router.navigate({to:"/"})}>Home</h3>
         <h3>Features</h3>
         <h3>Pricing</h3>
-        <h3>Support</h3>
+        <h3 onClick={()=>router.navigate({to:"/support"})}>Support</h3>
         </div>
         <div className='flex flex-row items-center gap-9'>
         <Popover open={open} onOpenChange={setOpen}>

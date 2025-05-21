@@ -13,6 +13,7 @@ import { createFileRoute } from '@tanstack/react-router'
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as SupportImport } from './routes/support'
 import { Route as AboutImport } from './routes/about'
 import { Route as CoinCoinIdImport } from './routes/coin/$coinId'
 
@@ -21,6 +22,12 @@ import { Route as CoinCoinIdImport } from './routes/coin/$coinId'
 const IndexLazyImport = createFileRoute('/')()
 
 // Create/Update Routes
+
+const SupportRoute = SupportImport.update({
+  id: '/support',
+  path: '/support',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const AboutRoute = AboutImport.update({
   id: '/about',
@@ -58,6 +65,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutImport
       parentRoute: typeof rootRoute
     }
+    '/support': {
+      id: '/support'
+      path: '/support'
+      fullPath: '/support'
+      preLoaderRoute: typeof SupportImport
+      parentRoute: typeof rootRoute
+    }
     '/coin/$coinId': {
       id: '/coin/$coinId'
       path: '/coin/$coinId'
@@ -73,12 +87,14 @@ declare module '@tanstack/react-router' {
 export interface FileRoutesByFullPath {
   '/': typeof IndexLazyRoute
   '/about': typeof AboutRoute
+  '/support': typeof SupportRoute
   '/coin/$coinId': typeof CoinCoinIdRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexLazyRoute
   '/about': typeof AboutRoute
+  '/support': typeof SupportRoute
   '/coin/$coinId': typeof CoinCoinIdRoute
 }
 
@@ -86,27 +102,30 @@ export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexLazyRoute
   '/about': typeof AboutRoute
+  '/support': typeof SupportRoute
   '/coin/$coinId': typeof CoinCoinIdRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/coin/$coinId'
+  fullPaths: '/' | '/about' | '/support' | '/coin/$coinId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/coin/$coinId'
-  id: '__root__' | '/' | '/about' | '/coin/$coinId'
+  to: '/' | '/about' | '/support' | '/coin/$coinId'
+  id: '__root__' | '/' | '/about' | '/support' | '/coin/$coinId'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexLazyRoute: typeof IndexLazyRoute
   AboutRoute: typeof AboutRoute
+  SupportRoute: typeof SupportRoute
   CoinCoinIdRoute: typeof CoinCoinIdRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexLazyRoute: IndexLazyRoute,
   AboutRoute: AboutRoute,
+  SupportRoute: SupportRoute,
   CoinCoinIdRoute: CoinCoinIdRoute,
 }
 
@@ -122,6 +141,7 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/about",
+        "/support",
         "/coin/$coinId"
       ]
     },
@@ -130,6 +150,9 @@ export const routeTree = rootRoute
     },
     "/about": {
       "filePath": "about.tsx"
+    },
+    "/support": {
+      "filePath": "support.tsx"
     },
     "/coin/$coinId": {
       "filePath": "coin/$coinId.tsx"
