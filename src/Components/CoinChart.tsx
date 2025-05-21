@@ -13,6 +13,7 @@ const PriceChart = ({coinId}:CoinChartProps) => {
   const [loading, setLoading] = useState(true);
   const [coinData,setCoinData]=useState<any>([]);
   const {currency}=useCurrencyStore()
+  console.log("coin chart",currency)
   useEffect(() => {
     const fetchChartData = async () => {
       try {
@@ -70,16 +71,31 @@ const PriceChart = ({coinId}:CoinChartProps) => {
           }}
         />
       )}
-      <div className="flex flex-col text-lg mt-10  items-center gap-2"> 
-      <h3 className="text-white space-x-2">Crypto Market Rank <span className="text-white">{coinData?.market_cap_rank}</span></h3>
+      <div className="flex flex-col md:text-lg text-sm mt-10  gap-2"> 
+      <div className="flex flex-row justify-between">
+      <h3 className="text-white space-x-2">Crypto Market Rank</h3>
+         <p className="text-white ">{coinData?.market_cap_rank?.USD}</p>
+      </div>
       <hr className="w-full border-muted-foreground "/>
-      <h3 className="text-white space-x-2">Current Price <span className="text-white">{coinData?.market_data?.current_price?.usd}</span></h3>
+      <div className="flex flex-row justify-between">
+      <h3 className="text-white space-x-2">Current Price </h3>
+         <p className="text-white ">{coinData?.market_data?.current_price?.USD}</p>
+      </div>
       <hr className="w-full border-muted-foreground"/>
-      <h3 className="text-white space-x-2">Market Cap <span className="text-white">{coinData?.market_data?.market_cap?.usd}</span></h3>
+      <div className="flex flex-row justify-between"> 
+      <h3 className="text-white space-x-2">Market Cap </h3>
+         <p className="text-white ">{coinData?.market_data?.market_cap?.USD}</p>
+      </div>
       <hr className="w-full border-muted-foreground"/>
-      <h3 className="text-white space-x-2">24 Hour High <span className="text-white">{coinData?.market_data?.high_24h?.usd}</span></h3>
+      <div className="flex flex-row justify-between"> 
+      <h3 className="text-white space-x-2">24 Hour High </h3>
+         <p className="text-white ">{coinData?.market_data?.high_24h?.USD}</p>
+      </div>
       <hr className="w-full border-muted-foreground"/>
-      <h3 className="text-white">24 Hour Low {coinData?.market_data?.low_24h?.usd}</h3>
+      <div className="flex flex-row justify-between"> 
+      <h3 className="text-white space-x-2">24 Hour Low </h3>
+         <p className="text-white ">{coinData?.market_data?.low_24h?.USD}</p>
+      </div>
       <hr className="w-full border-muted-foreground"/>
       </div>
     </div>

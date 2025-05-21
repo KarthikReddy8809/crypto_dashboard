@@ -66,8 +66,8 @@ export const TableComp = () => {
       <TableHead className="text-white">{index + 1}</TableHead>
       <TableHead className="text-white flex items-center gap-2"><span><img src={coin.image} alt="" className="w-10 h-10" /></span>{coin.name}</TableHead>
       <TableHead className="text-white">{symbol}{coin.current_price}</TableHead>
-      <TableHead className=" text-white">{coin.price_change_24h}</TableHead>
-      <TableHead className=" text-white">{coin.market_cap}</TableHead>
+      {coin.price_change_24h>0?(<TableHead className=" text-green-500">{Math.floor(coin.price_change_24h*100)/100}%</TableHead>):(<TableHead className=" text-red-500">{Math.floor(coin.price_change_24h*100)/100}%</TableHead>)}
+      <TableHead className=" text-white">{symbol}{coin.market_cap}</TableHead>
     </TableRow>
   ))}
   </TableBody>
