@@ -60,7 +60,7 @@ export const TableComp = () => {
   
     </TableRow>
   </TableHeader>
-  <TableBody className="items-center">
+  <TableBody className="items-center w-[200px] md:w-[700px] text-sm md:text-md">
   {data.map((coin, index) => (
     <TableRow key={coin.id} className="cursor-pointer" onClick={()=>router.navigate({to:`/coin/${coin.id}`})}>
       <TableHead className="text-white">{index + 1}</TableHead>

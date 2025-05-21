@@ -17,6 +17,15 @@ import {
     PopoverContent,
     PopoverTrigger,
   } from "@/components/ui/popover"
+  import { AlignJustify } from 'lucide-react';
+  import {
+    Sheet,
+    SheetClose,
+    SheetContent,
+    SheetHeader,
+    SheetTitle,
+    SheetTrigger,
+  } from "@/components/ui/sheet"
 import { cn } from '@/lib/utils'
 import { Check, ChevronsUpDown } from 'lucide-react'
 
@@ -42,6 +51,21 @@ export const NavBar = () => {
       },[value,symbols])
     return (
         <div className='sticky top-0 z-50 flex flex-row w-full backdrop-blur items-center h-16 border-b-2 border-b-muted-foreground justify-evenly'>
+        <div className='md:hidden'>
+        <Sheet>
+  <SheetTrigger><AlignJustify size={16} className='text-white'/></SheetTrigger>
+  <SheetContent side="left" className='bg-blue-950'>
+    <SheetHeader className='flex flex-col gap-2 '>
+      <SheetClose>
+      <SheetTitle><h3 className='text-white' onClick={()=>router.navigate({to:"/"})}>Home</h3></SheetTitle>
+      <SheetTitle><h3 className='text-white' onClick={()=>router.navigate({to:"/"})}>Features</h3></SheetTitle>
+      <SheetTitle><h3 className='text-white' onClick={()=>router.navigate({to:"/"})}>Pricing</h3></SheetTitle>
+      <SheetTitle><h3 className='text-white' onClick={()=>router.navigate({to:"/support"})}>Support</h3></SheetTitle>
+      </SheetClose>
+    </SheetHeader>
+  </SheetContent>
+</Sheet>
+        </div>
         <img src={logo} alt="logo" className='h-5 md:h-10  cursor-pointer' onClick={()=>router.navigate({to:"/"})} />
         <div className=' flex-row cursor-pointer hidden md:flex items-center text-white min-w-lg  justify-evenly'>
         <h3 onClick={()=>router.navigate({to:"/"})}>Home</h3>
@@ -49,6 +73,7 @@ export const NavBar = () => {
         <h3>Pricing</h3>
         <h3 onClick={()=>router.navigate({to:"/support"})}>Support</h3>
         </div>
+        
         <div className='flex flex-row items-center gap-9'>
         <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
