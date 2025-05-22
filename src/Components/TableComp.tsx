@@ -25,7 +25,16 @@ export const TableComp = () => {
   const [data,setData]=useState<coin[]>([]);
   const [loading,setLoading]=useState<boolean>(false);
   const {currency,symbol}=useCurrencyStore()
- 
+ const handleClick=(coinId:string)=>{
+    const token=localStorage.getItem("token");
+    if(!token)
+    {
+      router.navigate({to:`/signup`});
+    }
+    else{
+    router.navigate({to:`/coin/${coinId}`})
+    }
+  }
   const router=useRouter();
   useEffect(()=>{
     setLoading(true);
@@ -47,27 +56,27 @@ export const TableComp = () => {
   }
   else{
     return(
-      <div className='flex flex-col items-center w-[400px] md:w-[700px] text-white bg-violet-950 border border-black shadow-lg rounded-md'>
+      <div className='flex flex-col items-center w-[300px] md:w-[700px] text-white bg-violet-950 border border-black shadow-lg rounded-md'>
         <Table>
   <TableHeader>
     <TableRow>
-     <TableHead className=" text-white">S.No</TableHead>
-      <TableHead className="text-white">Coins</TableHead>
-      <TableHead className="text-white">Price</TableHead>
-      <TableHead className=" text-white">24H Change</TableHead>
-      <TableHead className=" text-white">Market Cap</TableHead>
+     <TableHead className=" text-white text-sm md:text-md">S.No</TableHead>
+      <TableHead className="text-white text-sm md:text-md">Coins</TableHead>
+      <TableHead className="text-white text-sm md:text-md">Price</TableHead>
+      <TableHead className=" text-white text-sm md:text-md">24H Change</TableHead>
+      <TableHead className=" text-white text-sm md:text-md">Market Cap</TableHead>
      
   
     </TableRow>
   </TableHeader>
   <TableBody className="items-center w-[200px] md:w-[700px] text-sm md:text-md">
   {data.map((coin, index) => (
-    <TableRow key={coin.id} className="cursor-pointer" onClick={()=>router.navigate({to:`/coin/${coin.id}`})}>
-      <TableHead className="text-white">{index + 1}</TableHead>
+    <TableRow key={coin.id} className="cursor-pointer" onClick={()=>handleClick(coin.id)}>
+      <TableHead className="text-white text-sm md:text-md">{index + 1}</TableHead>
       <TableHead className="text-white flex items-center gap-2"><span><img src={coin.image} alt="" className="w-10 h-10" /></span>{coin.name}</TableHead>
-      <TableHead className="text-white">{symbol}{coin.current_price}</TableHead>
+      <TableHead className="text-white text-sm md:text-md">{symbol}{coin.current_price}</TableHead>
       {coin.price_change_24h>0?(<TableHead className=" text-green-500">{Math.floor(coin.price_change_24h*100)/100}%</TableHead>):(<TableHead className=" text-red-500">{Math.floor(coin.price_change_24h*100)/100}%</TableHead>)}
-      <TableHead className=" text-white">{symbol}{coin.market_cap}</TableHead>
+      <TableHead className=" text-white text-sm md:text-md">{symbol}{coin.market_cap}</TableHead>
     </TableRow>
   ))}
   </TableBody>

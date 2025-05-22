@@ -4,7 +4,8 @@ import { Input } from '../components/ui/input';
 import { Card } from '../components/ui/card';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '../components/ui/button';
-import { Toaster } from 'sonner';
+import {UserData} from "../api/SignUpApi";
+import { Toaster,toast } from 'sonner';
 const UserSchema = z.object({
   firstname: z.string().min(3,"Name must be at least 3 characters long"),
   lastname: z.string().min(3,"Name must be at least 3 characters long"),
@@ -16,13 +17,23 @@ function App() {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<z.infer<typeof UserSchema>>({
     resolver: zodResolver(UserSchema),
   });
 
-  const onSubmit=(data:z.infer<typeof UserSchema>) => {
-    console.log(data)
+  const onSubmit=async(data:z.infer<typeof UserSchema>) => {
+    const res = await UserData(data.firstname+" "+data.lastname,data.email,data.password);
+
+    if(res)
+    {
+
+      toast.success('SignedUp Successfully');
+      localStorage.setItem("token",res);
+      reset();
+    
+    }
   }  
   return (
     <div className='flex justify-center items-center h-screen'>
