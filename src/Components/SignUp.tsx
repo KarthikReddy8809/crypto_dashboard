@@ -26,7 +26,6 @@ function Signup() {
   });
   const router =useRouter();
   const {coinId}=useCurrencyStore();
-  console.log("coinId",coinId);
   const onSubmit=async(data:z.infer<typeof UserSchema>) => {
     const res = await UserData(data.firstname+" "+data.lastname,data.email,data.password);
 
@@ -36,8 +35,8 @@ function Signup() {
       toast.success('SignedUp Successfully');
       localStorage.setItem("token",res);
       reset();
+      console.log("coinId",coinId);
       router.navigate({to:`/coin/${coinId}`})
-      console.log("navigated to coin page");
     
     }
   }  
