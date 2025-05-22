@@ -10,6 +10,7 @@ import {
   import useCurrencyStore from '../stores/useCurrencyStore'
   import { Loader2 } from 'lucide-react';
   import { useEffect,useState } from "react";
+
   import {getTopCoins} from '../api/HomePageApi'
 
   type coin = {
@@ -24,12 +25,14 @@ import {
 export const TableComp = () => {
   const [data,setData]=useState<coin[]>([]);
   const [loading,setLoading]=useState<boolean>(false);
-  const {currency,symbol}=useCurrencyStore()
+  const {currency,symbol,setCoinId}=useCurrencyStore()
  const handleClick=(coinId:string)=>{
     const token=localStorage.getItem("token");
     if(!token)
     {
+      setCoinId(coinId);
       router.navigate({to:`/signup`});
+
     }
     else{
     router.navigate({to:`/coin/${coinId}`})

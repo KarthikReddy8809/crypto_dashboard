@@ -5,6 +5,8 @@ import { Card } from '../components/ui/card';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '../components/ui/button';
 import {UserData} from "../api/SignUpApi";
+import useCurrencyStore from '../stores/useCurrencyStore'
+import {useRouter} from '@tanstack/react-router'
 import { Toaster,toast } from 'sonner';
 const UserSchema = z.object({
   firstname: z.string().min(3,"Name must be at least 3 characters long"),
@@ -13,7 +15,7 @@ const UserSchema = z.object({
   password:z.string()
 })
 
-function App() {
+function Signup() {
   const {
     register,
     handleSubmit,
@@ -22,7 +24,9 @@ function App() {
   } = useForm<z.infer<typeof UserSchema>>({
     resolver: zodResolver(UserSchema),
   });
-
+  const router =useRouter();
+  const {coinId}=useCurrencyStore();
+  console.log("coinId",coinId);
   const onSubmit=async(data:z.infer<typeof UserSchema>) => {
     const res = await UserData(data.firstname+" "+data.lastname,data.email,data.password);
 
@@ -32,6 +36,8 @@ function App() {
       toast.success('SignedUp Successfully');
       localStorage.setItem("token",res);
       reset();
+      router.navigate({to:`/coin/${coinId}`})
+      console.log("navigated to coin page");
     
     }
   }  
@@ -76,4 +82,4 @@ function App() {
   )
 }
 
-export default App
+export default Signup
