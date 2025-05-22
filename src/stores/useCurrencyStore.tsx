@@ -12,6 +12,7 @@ interface CurrencyState {
 const useCurrencyStore = create<CurrencyState>((set) => ({
   currency: 'USD',
   symbol:"$",
+  coinId: " ",
   setCurrency: (newCurrency: string) => set({ currency: newCurrency }),
   setSymbol: (newSymbol: string) => set({ symbol: newSymbol }),
   setCoinId: (newCoinId: string) => set({coinId:newCoinId})
