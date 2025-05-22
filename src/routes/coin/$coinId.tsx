@@ -1,9 +1,18 @@
+import { redirect } from '@tanstack/react-router'
 import { createFileRoute } from '@tanstack/react-router'
 import {useParams} from '@tanstack/react-router'
 import {useEffect,useState} from 'react'
 import { Loader2 } from 'lucide-react'
 import CoinChart from '@/Components/CoinChart'
 export const Route = createFileRoute('/coin/$coinId')({
+  beforeLoad: ()=>{
+    const token = localStorage.getItem("token");
+    if(!token){
+      throw redirect({
+        to:'/signup'
+      });
+    }
+  },
   component: RouteComponent,
 })
 
