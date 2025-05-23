@@ -36,6 +36,7 @@ function Signup() {
       localStorage.setItem("token",res);
       reset();
       console.log("coinId",coinId);
+      console.log("flag",flag);
       if(!flag)
       {
       router.navigate({to:`/coin/${coinId}`})

@@ -34,9 +34,9 @@ import { Check, ChevronsUpDown } from 'lucide-react'
 export const NavBar = () => {
     const [open, setOpen] = React.useState(false)
     const {setCurrency,setSymbol,setFlag}=useCurrencyStore()
-    const [value, setValue] = React.useState("")
+    const [value, setValue] = React.useState("");
+    const token = useCurrencyStore((state) => state.token);
     const [symbols,setSymbols]=React.useState("")
-    const token=localStorage.getItem("token");
     console.log("symbols",symbols)
     const frameworks = [
         { label: "USD", value: "USD",symbol:"$" },
@@ -47,6 +47,7 @@ export const NavBar = () => {
       ]
       const router=useRouter();
       useEffect(()=>{
+        
         setCurrency(value)
         setSymbol(symbols)
         console.log(symbols)
