@@ -59,7 +59,7 @@ export const TableComp = () => {
   }
   else{
     return(
-      <div className='flex flex-col items-center w-[300px] md:w-[700px] text-white bg-violet-950 border border-black shadow-lg rounded-md'>
+      <div className='flex flex-col items-center w-[400px] md:w-[700px] text-white bg-violet-950 border border-black shadow-lg rounded-md'>
         <Table>
   <TableHeader>
     <TableRow>
@@ -72,7 +72,7 @@ export const TableComp = () => {
   
     </TableRow>
   </TableHeader>
-  <TableBody className="items-center w-[200px] md:w-[700px] text-sm md:text-md">
+  <TableBody className="items-center w-[400px] md:w-[700px] text-sm md:text-md">
   {data.map((coin, index) => (
     <TableRow key={coin.id} className="cursor-pointer" onClick={()=>handleClick(coin.id)}>
       <TableHead className="text-white text-sm md:text-md">{index + 1}</TableHead>

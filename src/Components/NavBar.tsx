@@ -17,6 +17,7 @@ import {
     PopoverContent,
     PopoverTrigger,
   } from "@/components/ui/popover"
+  
   import { AlignJustify } from 'lucide-react';
   import {
     Sheet,
@@ -32,9 +33,10 @@ import { Check, ChevronsUpDown } from 'lucide-react'
 
 export const NavBar = () => {
     const [open, setOpen] = React.useState(false)
-    const {setCurrency,setSymbol}=useCurrencyStore()
+    const {setCurrency,setSymbol,setFlag}=useCurrencyStore()
     const [value, setValue] = React.useState("")
     const [symbols,setSymbols]=React.useState("")
+    const token=localStorage.getItem("token");
     console.log("symbols",symbols)
     const frameworks = [
         { label: "USD", value: "USD",symbol:"$" },
@@ -49,6 +51,10 @@ export const NavBar = () => {
         setSymbol(symbols)
         console.log(symbols)
       },[value,symbols])
+      const handleSignup =()=>{
+        router.navigate({to:"/signup"})
+        setFlag(true)
+      }
     return (
         <div className='sticky top-0 z-50 flex flex-row w-full backdrop-blur items-center h-16 border-b-2 border-b-muted-foreground justify-evenly'>
         <div className='md:hidden mt-2'>
@@ -121,7 +127,7 @@ export const NavBar = () => {
         </Command>
       </PopoverContent>
     </Popover>
-    <Button  className='bg-white text-black rounded-full hover:bg-white/80' onClick={()=>router.navigate({to:"/signup"})}>Sign Up <ArrowUpRight size={16}/></Button>
+    {token?"":(<Button  className='bg-white text-black rounded-full hover:bg-white/80' onClick={handleSignup}>Sign Up <ArrowUpRight size={16}/></Button>)}
     </div>
         </div>
     )

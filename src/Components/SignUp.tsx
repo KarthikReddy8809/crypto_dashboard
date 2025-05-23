@@ -25,7 +25,7 @@ function Signup() {
     resolver: zodResolver(UserSchema),
   });
   const router =useRouter();
-  const {coinId}=useCurrencyStore();
+  const {coinId,flag}=useCurrencyStore();
   const onSubmit=async(data:z.infer<typeof UserSchema>) => {
     const res = await UserData(data.firstname+" "+data.lastname,data.email,data.password);
 
@@ -36,7 +36,13 @@ function Signup() {
       localStorage.setItem("token",res);
       reset();
       console.log("coinId",coinId);
+      if(!flag)
+      {
       router.navigate({to:`/coin/${coinId}`})
+      }
+      else{
+        router.navigate({to:"/"})
+      }
     
     }
   }  
