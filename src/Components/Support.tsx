@@ -69,7 +69,7 @@ function App() {
     <Input type="text" {...register('message')}/>
     {errors.message && <p className="text-red-500">{errors.message.message}</p>}
     </div>
-    <Button type="submit" className='rounded-full mt-2 bg-purple-500'>Submit</Button>
+    <Button type="submit" className='rounded-full mt-2 bg-purple-500 hover:bg-purple-600'>Submit</Button>
     </form>
   </Card>
   <Toaster position="top-right" richColors />

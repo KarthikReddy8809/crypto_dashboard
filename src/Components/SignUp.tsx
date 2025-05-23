@@ -80,7 +80,7 @@ function Signup() {
         {errors.password && <p className="text-red-500">{errors.password.message}</p>}
     </div>
 
-    <Button type="submit" className='rounded-full mt-2 bg-purple-500'>Sign Up</Button>
+    <Button type="submit" className='rounded-full mt-2 bg-purple-500 hover:bg-purple-600'>Sign Up</Button>
     </form>
   </Card>
   <Toaster position="top-right" richColors />
